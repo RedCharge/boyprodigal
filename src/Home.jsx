@@ -171,7 +171,7 @@ export default function Home() {
       <motion.div className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-900 to-red-600 origin-left z-[60]" style={{ scaleX }} />
 
       <nav className="fixed top-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 md:py-6 flex justify-between items-center mix-blend-difference backdrop-blur-sm">
-         <a href="#" className="font-cinzel font-black text-xl sm:text-2xl text-red-600 tracking-widest hover:scale-110 transition-transform">K Rhymz</a>
+         <a href="#" className="font-cinzel font-black text-xl sm:text-2xl text-red-600 tracking-widest hover:scale-110 transition-transform">BP</a>
          <div className="hidden md:flex gap-6 lg:gap-10 text-xs font-montserrat font-bold tracking-[0.2em] uppercase">
             {['Origins', 'Works', 'Visions', 'Ritual'].map((item, i) => (
               <a key={i} href={`#${item.toLowerCase()}`} className="hover:text-red-600 transition-colors relative group">
@@ -275,7 +275,7 @@ export default function Home() {
              <div className="bg-neutral-900/80 backdrop-blur-xl border border-white/5 p-6 sm:p-8 md:p-12 lg:p-16 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
                 <GothicHeading text="The Origin" size="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" className="mb-6 sm:mb-8" />
                 <div className="font-montserrat text-neutral-400 text-base sm:text-lg md:text-xl leading-relaxed font-light space-y-4 sm:space-y-6">
-                   <p><strong className="text-white font-bold">Khojo Rhymz</strong> (Prince Adusu) was forged in the creative fires of <span className="text-red-500 font-bold">Ghana</span>. From Obuasi to the streets of Accra, his voice is a weapon of precision.</p>
+                   <p><strong className="text-white font-bold">Boyprodigal</strong> (Prince Adusu) was forged in the creative fires of <span className="text-red-500 font-bold">Ghana</span>. From Obuasi to the streets of Accra, his voice is a weapon of precision.</p>
                    <p>What began at <span className="text-white border-b border-red-800">Koforidua Secondary Technical School</span> has mutated into the <span className="font-cinzel text-red-500 text-xl sm:text-2xl mx-1">Prodigal Society</span>—a dedicated legion of fans.</p>
                 </div>
                 
