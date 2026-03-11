@@ -125,7 +125,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-[#020000] text-neutral-200 font-sans selection:bg-red-900 selection:text-white overflow-x-hidden w-full max-w-[100vw]">
+    <div className="bg-[#020000] text-neutral-200 font-sans selection:bg-red-900 selection:text-white overflow-x-hidden perspective-1000 cursor-none">
       
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@200;300;400;600;900&family=Nosifer&display=swap');
@@ -147,39 +147,6 @@ export default function Home() {
         
         @media (max-width: 768px) {
           .cursor-none { cursor: auto; }
-          .text-8xl, .text-7xl, .text-6xl { 
-            font-size: clamp(2.5rem, 15vw, 4rem) !important; 
-          }
-          .max-w-6xl, .max-w-7xl { 
-            max-width: 100% !important; 
-          }
-          .gap-8, .gap-10, .gap-12 { 
-            gap: 1rem !important; 
-          }
-        }
-
-        /* Fix for all images on mobile */
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-
-        /* Ensure no horizontal scroll */
-        body, html {
-          overflow-x: hidden;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-        }
-
-        /* Fix for the hero section margins */
-        .hero-fix {
-          width: 100vw;
-          position: relative;
-          left: 50%;
-          right: 50%;
-          margin-left: -50vw;
-          margin-right: -50vw;
         }
       `}</style>
 
@@ -222,10 +189,10 @@ export default function Home() {
          </div>
       </nav>
 
-      <main className="relative z-10 w-full max-w-[100vw] overflow-x-hidden">
+      <main className="relative z-10">
 
         {/* --- HERO SECTION WITH VIDEO --- */}
-        <section className="h-screen relative flex items-center justify-center overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <section className="h-screen relative flex items-center justify-center overflow-hidden" style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
           {/* GIF Background */}
           <div className="absolute inset-0 w-full h-full z-0">
             <img
@@ -288,7 +255,7 @@ export default function Home() {
         </section>
 
         {/* --- ORIGINS (Parallax) --- */}
-        <section id="origins" className="min-h-screen bg-black relative py-12 sm:py-16 md:py-20 w-full">
+        <section id="origins" className="min-h-screen bg-black relative py-12 sm:py-16 md:py-20">
           <div className="w-full relative z-0">
              <div className="absolute top-0 left-0 w-full h-24 sm:h-32 bg-gradient-to-b from-black to-transparent z-10"></div>
              <ParallaxImage src={IMAGES.bio} alt="Boyprodigal Origins" />
@@ -357,7 +324,7 @@ export default function Home() {
                    initial={isMobile ? { rotateY: 0, rotateX: 0 } : {}}
                    transition={{ type: "spring", stiffness: 100 }}
                    viewport={{ once: false }}
-                   className="relative z-10 aspect-square max-w-md sm:max-w-lg mx-auto w-full"
+                   className="relative z-10 aspect-square max-w-md sm:max-w-lg mx-auto"
                 >
                    <div className="absolute inset-0 bg-red-600/30 blur-[60px] sm:blur-[80px] -z-10 group-hover:bg-red-600/50 transition-colors duration-500"></div>
                    
@@ -374,7 +341,7 @@ export default function Home() {
         </Section>
 
         {/* --- VISIONS (Gallery) - CLASSIC REDESIGN --- */}
-        <section id="visions" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-black relative w-full">
+        <section id="visions" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-black relative">
            <div className="px-4 sm:px-6 mb-8 sm:mb-12 md:mb-16 max-w-7xl mx-auto flex flex-col md:flex-row items-end justify-between gap-4 sm:gap-6">
               <GothicHeading text="GALLERY" size="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" />
               <p className="font-montserrat text-xs tracking-[0.3em] text-neutral-500 uppercase text-right">Glimpses into the void</p>
@@ -383,7 +350,24 @@ export default function Home() {
            {/* Classic Gallery Layout with staggered arrangement */}
            <div className="max-w-7xl mx-auto px-4 sm:px-6">
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-               {IMAGES.gallery.slice(0, 3).map((img, idx) => {
+               {IMAGES.gallery.slice(0, 6).map((img, idx) => {
+                 // Different sizes for staggered effect
+                 const heightClasses = [
+                   "h-[300px] sm:h-[400px] md:h-[500px]",
+                   "h-[250px] sm:h-[350px] md:h-[450px]",
+                   "h-[350px] sm:h-[450px] md:h-[550px]"
+                 ];
+                 
+                 // Classic framing with different aspect ratios
+                 const frameClasses = [
+                   "md:col-span-2 lg:col-span-1",
+                   "md:col-span-1",
+                   "md:col-span-1 lg:col-span-2",
+                   "md:col-span-2 lg:col-span-1",
+                   "md:col-span-1 lg:col-span-1",
+                   "md:col-span-1 lg:col-span-2"
+                 ];
+                 
                  return (
                    <motion.div
                      key={idx}
@@ -391,11 +375,7 @@ export default function Home() {
                      whileInView={{ opacity: 1, y: 0 }}
                      viewport={{ once: true }}
                      transition={{ duration: 0.6, delay: idx * 0.1 }}
-                     className={`relative group overflow-hidden w-full ${
-                       idx === 0 ? "h-[300px] sm:h-[400px] md:h-[500px]" : 
-                       idx === 1 ? "h-[250px] sm:h-[350px] md:h-[450px]" : 
-                       "h-[350px] sm:h-[450px] md:h-[550px]"
-                     }`}
+                     className={`relative group overflow-hidden ${frameClasses[idx]} ${heightClasses[idx % 3]}`}
                    >
                      {/* Classic image frame effect */}
                      <div className="absolute inset-0 border-2 border-red-900/30 z-20 pointer-events-none"></div>
@@ -403,7 +383,7 @@ export default function Home() {
                      
                      {/* Image with classic filter */}
                      <img
-                       src={img}
+                       src={IMAGES.gallery[idx]}
                        alt={`Vision ${idx + 1}`}
                        className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110"
                      />
@@ -435,7 +415,7 @@ export default function Home() {
         </section>
 
         {/* --- NOW AVAILABLE (New Section) --- */}
-        <section id="available" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] relative overflow-hidden border-y border-red-900/30 w-full">
+        <section id="available" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] relative overflow-hidden border-y border-red-900/30">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(220,38,38,0.15),transparent_70%)]"></div>
             <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom,rgba(120,0,0,0.2),transparent_70%)]"></div>
@@ -459,7 +439,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="relative group w-full"
+                className="relative group"
               >
                 <div className="absolute inset-0 bg-red-600/20 blur-[80px] -z-10 group-hover:bg-red-600/40 transition-colors duration-500"></div>
                 
@@ -483,7 +463,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="space-y-6 sm:space-y-8 w-full"
+                className="space-y-6 sm:space-y-8"
               >
                 <div className="space-y-4">
                   <h3 className="font-cinzel text-3xl sm:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
@@ -576,7 +556,7 @@ export default function Home() {
         </section>
 
         {/* --- RITUAL (Links) --- */}
-        <section id="ritual" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] border-t border-red-900/30 relative overflow-hidden w-full">
+        <section id="ritual" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] border-t border-red-900/30 relative overflow-hidden">
            <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
               <div className="w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] border-[1px] border-white rounded-full animate-[spin_60s_linear_infinite]"></div>
               <div className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] border-[1px] border-white rotate-45"></div>
