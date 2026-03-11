@@ -9,9 +9,6 @@ import Three from './images/three.jpg';
 // Import the new product image - replace with your actual image path
 import nowAvailableProduct from './images/now-available-product.jpg'; // Add your image here
 
-
-
-
 // --- DATA & CONFIG ---
 const ARTIST_NAME = "BOYPRODIGAL";
 const TAGLINE = "The Voice of the Prodigal Society";
@@ -172,8 +169,11 @@ export default function Home() {
 
       <motion.div className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-900 to-red-600 origin-left z-[60]" style={{ scaleX }} />
 
+      {/* NAVIGATION - PRESERVED ORIGINAL BEHAVIOR */}
       <nav className="fixed top-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 md:py-6 flex justify-between items-center mix-blend-difference backdrop-blur-sm">
          <a href="#" className="font-cinzel font-black text-xl sm:text-2xl text-red-600 tracking-widest hover:scale-110 transition-transform">BP</a>
+         
+         {/* Desktop Menu - Hidden on mobile, shown on md and up */}
          <div className="hidden md:flex gap-6 lg:gap-10 text-xs font-montserrat font-bold tracking-[0.2em] uppercase">
             {['Origins', 'Works', 'Visions', 'Available', 'Ritual'].map((item, i) => (
               <a key={i} href={`#${item.toLowerCase()}`} className="hover:text-red-600 transition-colors relative group">
@@ -182,6 +182,8 @@ export default function Home() {
               </a>
             ))}
          </div>
+         
+         {/* Mobile Icon - Shown only on mobile, hidden on md and up */}
          <div className="flex md:hidden gap-4">
            <a href="#music" className="text-red-600">
              <Disc className="animate-spin-slow w-5 h-5" />
@@ -347,25 +349,15 @@ export default function Home() {
               <p className="font-montserrat text-xs tracking-[0.3em] text-neutral-500 uppercase text-right">Glimpses into the void</p>
            </div>
 
-           {/* Classic Gallery Layout with staggered arrangement */}
+           {/* Classic Gallery Layout with staggered arrangement - Mobile optimized */}
            <div className="max-w-7xl mx-auto px-4 sm:px-6">
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-               {IMAGES.gallery.slice(0, 6).map((img, idx) => {
-                 // Different sizes for staggered effect
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+               {IMAGES.gallery.map((img, idx) => {
+                 // Mobile-optimized heights - single column on mobile
                  const heightClasses = [
                    "h-[300px] sm:h-[400px] md:h-[500px]",
-                   "h-[250px] sm:h-[350px] md:h-[450px]",
-                   "h-[350px] sm:h-[450px] md:h-[550px]"
-                 ];
-                 
-                 // Classic framing with different aspect ratios
-                 const frameClasses = [
-                   "md:col-span-2 lg:col-span-1",
-                   "md:col-span-1",
-                   "md:col-span-1 lg:col-span-2",
-                   "md:col-span-2 lg:col-span-1",
-                   "md:col-span-1 lg:col-span-1",
-                   "md:col-span-1 lg:col-span-2"
+                   "h-[300px] sm:h-[350px] md:h-[450px]",
+                   "h-[300px] sm:h-[450px] md:h-[550px]"
                  ];
                  
                  return (
@@ -375,11 +367,11 @@ export default function Home() {
                      whileInView={{ opacity: 1, y: 0 }}
                      viewport={{ once: true }}
                      transition={{ duration: 0.6, delay: idx * 0.1 }}
-                     className={`relative group overflow-hidden ${frameClasses[idx]} ${heightClasses[idx % 3]}`}
+                     className={`relative group overflow-hidden col-span-1 ${heightClasses[idx % 3]}`}
                    >
                      {/* Classic image frame effect */}
                      <div className="absolute inset-0 border-2 border-red-900/30 z-20 pointer-events-none"></div>
-                     <div className="absolute inset-4 border border-white/10 z-20 pointer-events-none"></div>
+                     <div className="absolute inset-2 sm:inset-4 border border-white/10 z-20 pointer-events-none"></div>
                      
                      {/* Image with classic filter */}
                      <img
@@ -392,20 +384,20 @@ export default function Home() {
                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60 mix-blend-multiply"></div>
                      <div className="absolute inset-0 bg-red-900/10 mix-blend-color opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                      
-                     {/* Classic label */}
-                     <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-black via-black to-transparent">
+                     {/* Classic label - mobile optimized */}
+                     <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-black via-black to-transparent">
                        <div className="flex justify-between items-center">
                          <div>
-                           <span className="font-cinzel text-xl sm:text-2xl text-white block">VISION 0{idx + 1}</span>
-                           <span className="font-montserrat text-xs text-neutral-400 uppercase tracking-widest">Archive {2020 + idx}</span>
+                           <span className="font-cinzel text-lg sm:text-xl md:text-2xl text-white block">VISION 0{idx + 1}</span>
+                           <span className="font-montserrat text-[10px] sm:text-xs text-neutral-400 uppercase tracking-widest">Archive {2020 + idx}</span>
                          </div>
-                         <div className="w-8 h-[1px] bg-red-600"></div>
+                         <div className="w-6 sm:w-8 h-[1px] bg-red-600"></div>
                        </div>
                      </div>
                      
-                     {/* Top corner number - classic photography style */}
-                     <div className="absolute top-4 left-4 z-30 opacity-30 group-hover:opacity-100 transition-opacity duration-300">
-                       <span className="font-cinzel text-4xl sm:text-5xl text-white/20">0{idx + 1}</span>
+                     {/* Top corner number - mobile optimized */}
+                     <div className="absolute top-2 sm:top-4 left-2 sm:left-4 z-30 opacity-30 group-hover:opacity-100 transition-opacity duration-300">
+                       <span className="font-cinzel text-3xl sm:text-4xl md:text-5xl text-white/20">0{idx + 1}</span>
                      </div>
                    </motion.div>
                  );
@@ -414,7 +406,7 @@ export default function Home() {
            </div>
         </section>
 
-        {/* --- NOW AVAILABLE (New Section) --- */}
+        {/* --- NOW AVAILABLE (New Section) - Mobile Optimized --- */}
         <section id="available" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] relative overflow-hidden border-y border-red-900/30">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(220,38,38,0.15),transparent_70%)]"></div>
@@ -426,26 +418,26 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
+              className="text-center mb-8 sm:mb-12 md:mb-16"
             >
-              <span className="text-red-600 font-bold tracking-[0.5em] text-xs uppercase animate-pulse block mb-4">Exclusive Release</span>
-              <GothicHeading text="NOW AVAILABLE" size="text-4xl sm:text-5xl md:text-6xl lg:text-7xl" />
+              <span className="text-red-600 font-bold tracking-[0.5em] text-[10px] sm:text-xs uppercase animate-pulse block mb-3 sm:mb-4">Exclusive Release</span>
+              <GothicHeading text="NOW AVAILABLE" size="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" />
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-              {/* Product Image */}
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
+              {/* Product Image - Full width on mobile */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="relative group"
+                className="relative group order-1"
               >
-                <div className="absolute inset-0 bg-red-600/20 blur-[80px] -z-10 group-hover:bg-red-600/40 transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-red-600/20 blur-[60px] sm:blur-[80px] -z-10 group-hover:bg-red-600/40 transition-colors duration-500"></div>
                 
-                {/* Decorative frame */}
-                <div className="absolute -inset-4 border border-red-900/30 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -inset-2 border border-white/10 rounded-sm"></div>
+                {/* Decorative frame - mobile optimized */}
+                <div className="absolute -inset-2 sm:-inset-4 border border-red-900/30 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute -inset-1 sm:-inset-2 border border-white/10 rounded-sm"></div>
                 
                 <img
                   src={nowAvailableProduct} 
@@ -457,63 +449,63 @@ export default function Home() {
                 <div className="absolute inset-0 bg-red-900/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </motion.div>
 
-              {/* Content */}
+              {/* Content - Mobile optimized spacing */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="space-y-6 sm:space-y-8"
+                className="space-y-5 sm:space-y-6 md:space-y-8 order-2"
               >
-                <div className="space-y-4">
-                  <h3 className="font-cinzel text-3xl sm:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
                     Join the Prodigal Society
                   </h3>
                   
-                  <p className="font-montserrat text-neutral-400 text-base sm:text-lg leading-relaxed">
+                  <p className="font-montserrat text-neutral-400 text-sm sm:text-base md:text-lg leading-relaxed">
                     Be among the first to own this exclusive piece. Limited quantities available. Secure your connection to the Prodigal Society today.
                   </p>
                 </div>
 
-                {/* WhatsApp Community Link */}
+                {/* WhatsApp Community Link - Full width on mobile */}
                 <motion.a
                   href="https://chat.whatsapp.com/Iiv2Xw9FH48GjgMOOEMeTH?mode=gi_t"
                   target="_blank"
                   rel="noreferrer"
                   whileHover={{ scale: 1.02 }}
-                  className="group relative block p-6 sm:p-8 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-green-500/50"
+                  className="group relative block p-5 sm:p-6 md:p-8 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-green-500/50"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <div className="relative z-10 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:border-green-500/30 group-hover:bg-green-500/10 transition-all">
-                        <Users className="w-6 h-6 sm:w-7 sm:h-7 text-green-500" />
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:border-green-500/30 group-hover:bg-green-500/10 transition-all">
+                        <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-green-500" />
                       </div>
                       <div>
-                        <h4 className="font-cinzel text-xl sm:text-2xl text-white group-hover:text-green-500 transition-colors">WhatsApp Community</h4>
-                        <p className="font-montserrat text-xs text-neutral-500 uppercase tracking-wider">Join the inner circle</p>
+                        <h4 className="font-cinzel text-base sm:text-xl md:text-2xl text-white group-hover:text-green-500 transition-colors">WhatsApp Community</h4>
+                        <p className="font-montserrat text-[10px] sm:text-xs text-neutral-500 uppercase tracking-wider">Join the inner circle</p>
                       </div>
                     </div>
-                    <ExternalLink className="w-5 h-5 text-green-500/50 group-hover:text-green-500 transition-colors" />
+                    <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-green-500/50 group-hover:text-green-500 transition-colors" />
                   </div>
                 </motion.a>
 
-                {/* Contact Information */}
-                <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                {/* Contact Information - Stack on mobile, grid on larger screens */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4">
                   {/* Email */}
                   <motion.a
                     href="mailto:princeadusu123@gmail.com"
                     whileHover={{ scale: 1.02 }}
-                    className="group relative p-4 sm:p-6 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-red-500/50"
+                    className="group relative p-4 sm:p-5 md:p-6 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-red-500/50"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    <div className="relative z-10 flex items-center gap-3">
-                      <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-red-500/70 group-hover:text-red-500 transition-colors" />
-                      <div>
-                        <h5 className="font-cinzel text-sm sm:text-base text-white">Email</h5>
-                        <p className="font-montserrat text-xs text-neutral-500 break-all">princeadusu123@gmail.com</p>
+                    <div className="relative z-10 flex items-center gap-2 sm:gap-3">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-red-500/70 group-hover:text-red-500 transition-colors flex-shrink-0" />
+                      <div className="min-w-0">
+                        <h5 className="font-cinzel text-xs sm:text-sm md:text-base text-white">Email</h5>
+                        <p className="font-montserrat text-[10px] sm:text-xs text-neutral-500 truncate">princeadusu123@gmail.com</p>
                       </div>
                     </div>
                   </motion.a>
@@ -522,23 +514,23 @@ export default function Home() {
                   <motion.a
                     href="tel:+233554827431"
                     whileHover={{ scale: 1.02 }}
-                    className="group relative p-4 sm:p-6 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-red-500/50"
+                    className="group relative p-4 sm:p-5 md:p-6 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 hover:border-red-500/50"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
-                    <div className="relative z-10 flex items-center gap-3">
-                      <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-red-500/70 group-hover:text-red-500 transition-colors" />
+                    <div className="relative z-10 flex items-center gap-2 sm:gap-3">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-red-500/70 group-hover:text-red-500 transition-colors flex-shrink-0" />
                       <div>
-                        <h5 className="font-cinzel text-sm sm:text-base text-white">Phone</h5>
-                        <p className="font-montserrat text-xs text-neutral-500">0554827431</p>
+                        <h5 className="font-cinzel text-xs sm:text-sm md:text-base text-white">Phone</h5>
+                        <p className="font-montserrat text-[10px] sm:text-xs text-neutral-500">0554827431</p>
                       </div>
                     </div>
                   </motion.a>
                 </div>
 
                 {/* Decorative text */}
-                <div className="pt-4">
-                  <p className="font-cinzel text-xs text-red-900/50 tracking-[0.3em] uppercase text-center sm:text-left">
+                <div className="pt-2 sm:pt-4">
+                  <p className="font-cinzel text-[10px] sm:text-xs text-red-900/50 tracking-[0.3em] uppercase text-center sm:text-left">
                     For bookings & inquiries
                   </p>
                 </div>
@@ -550,7 +542,7 @@ export default function Home() {
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
-              className="h-[1px] bg-gradient-to-r from-transparent via-red-900 to-transparent mt-12 sm:mt-16"
+              className="h-[1px] bg-gradient-to-r from-transparent via-red-900 to-transparent mt-8 sm:mt-12 md:mt-16"
             />
           </div>
         </section>
@@ -558,14 +550,14 @@ export default function Home() {
         {/* --- RITUAL (Links) --- */}
         <section id="ritual" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] border-t border-red-900/30 relative overflow-hidden">
            <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-              <div className="w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] border-[1px] border-white rounded-full animate-[spin_60s_linear_infinite]"></div>
-              <div className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] border-[1px] border-white rotate-45"></div>
+              <div className="w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] border-[1px] border-white rounded-full animate-[spin_60s_linear_infinite]"></div>
+              <div className="absolute w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] border-[1px] border-white rotate-45"></div>
            </div>
 
            <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-              <GothicHeading text="STREAM MY SONGS" size="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" className="mb-8 sm:mb-12 md:mb-16" />
+              <GothicHeading text="STREAM MY SONGS" size="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl" className="mb-6 sm:mb-8 md:mb-12 lg:mb-16" />
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                  {STREAMING_LINKS.map((link, i) => (
                    <motion.a 
                      key={i}
@@ -573,15 +565,15 @@ export default function Home() {
                      target="_blank"
                      rel="noreferrer"
                      whileHover={{ scale: 1.02 }}
-                     className={`group relative h-24 sm:h-28 md:h-32 flex items-center justify-between px-6 sm:px-8 md:px-10 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 ${link.borderColor}`}
+                     className={`group relative h-20 sm:h-24 md:h-28 lg:h-32 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 border border-white/10 bg-black/50 overflow-hidden transition-all duration-300 ${link.borderColor}`}
                    >
                       <div className="relative z-10 text-left">
-                         <h3 className={`font-cinzel text-lg sm:text-xl md:text-2xl text-neutral-300 transition-colors duration-300 ${link.color}`}>{link.name}</h3>
-                         <span className="text-[10px] uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400">Stream Now</span>
+                         <h3 className={`font-cinzel text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-300 transition-colors duration-300 ${link.color}`}>{link.name}</h3>
+                         <span className="text-[8px] sm:text-[10px] uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400">Stream Now</span>
                       </div>
                       
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-transparent ${link.bg} transition-all duration-300`}>
-                        <ExternalLink className={`w-4 h-4 sm:w-5 sm:h-5 text-neutral-500 transition-colors ${link.color}`} />
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-transparent ${link.bg} transition-all duration-300`}>
+                        <ExternalLink className={`w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-500 transition-colors ${link.color}`} />
                       </div>
 
                       <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
@@ -592,11 +584,11 @@ export default function Home() {
         </section>
 
         {/* --- FOOTER --- */}
-        <footer className="bg-black py-8 sm:py-12 border-t border-white/5 flex flex-col items-center justify-center gap-3 sm:gap-4">
-           <h2 className="font-nosifer text-2xl sm:text-3xl text-red-900/50 hover:text-red-700 transition-colors cursor-pointer tracking-widest">
+        <footer className="bg-black py-6 sm:py-8 md:py-12 border-t border-white/5 flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 px-4">
+           <h2 className="font-nosifer text-xl sm:text-2xl md:text-3xl text-red-900/50 hover:text-red-700 transition-colors cursor-pointer tracking-widest text-center">
               BOYPRODIGAL
            </h2>
-           <p className="font-montserrat text-neutral-600 text-[10px] uppercase tracking-[0.2em]">
+           <p className="font-montserrat text-neutral-600 text-[8px] sm:text-[10px] uppercase tracking-[0.2em] text-center">
               © {new Date().getFullYear()} Prodigal Society. All Rights Reserved.
            </p>
         </footer>
