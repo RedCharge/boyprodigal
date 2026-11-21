@@ -2,10 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Play, ExternalLink, ChevronRight, Share2, Disc, Users, Mail, Phone } from 'lucide-react';
 import gifBg from './images/gif.gif';
-import EP from './images/EP.jpg';
-import One from './images/one.jpg';
-import Two from './images/two.jpg';
-import Three from './images/three.jpg';
+
 // Import the new product image - replace with your actual image path
 import nowAvailableProduct from './images/now-available-product.jpg'; // Add your image here
 
@@ -279,8 +276,8 @@ export default function Home() {
              <div className="bg-neutral-900/80 backdrop-blur-xl border border-white/5 p-6 sm:p-8 md:p-12 lg:p-16 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
                 <GothicHeading text="The Origin" size="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" className="mb-6 sm:mb-8" />
                 <div className="font-montserrat text-neutral-400 text-base sm:text-lg md:text-xl leading-relaxed font-light space-y-4 sm:space-y-6">
-                   <p><strong className="text-white font-bold">Boyprodigal</strong> (Prince Adusu) was forged in the creative fires of <span className="text-red-500 font-bold">Ghana</span>. From Obuasi to the streets of Accra, his voice is a weapon of precision.</p>
-                   <p>What began at <span className="text-white border-b border-red-800">Koforidua Secondary Technical School</span> has mutated into the <span className="font-cinzel text-red-500 text-xl sm:text-2xl mx-1">Prodigal Society</span>—a dedicated legion of fans.</p>
+                   <p><strong className="text-white font-bold">Boyprodigal</strong> was forged in the creative fires of <span className="text-red-500 font-bold">Ghana</span>. From the streets of Accra, his voice is a weapon of precision.</p>
+                   <p>What began as <span className="text-white border-b border-red-800"> spark</span> has mutated into the <span className="font-cinzel text-red-500 text-xl sm:text-2xl mx-1">Prodigal Society</span>—a dedicated legion of fans.</p>
                 </div>
                 
                 <div className="mt-8 sm:mt-12 flex items-center gap-4 sm:gap-8 border-t border-white/10 pt-6 sm:pt-8">
@@ -407,7 +404,7 @@ export default function Home() {
         </section>
 
         {/* --- NOW AVAILABLE (New Section) - Mobile Optimized --- */}
-        <section id="available" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] relative overflow-hidden border-y border-red-900/30">
+      <section id="available" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#0a0000] relative overflow-hidden border-y border-red-900/30">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(220,38,38,0.15),transparent_70%)]"></div>
             <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom,rgba(120,0,0,0.2),transparent_70%)]"></div>
