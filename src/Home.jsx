@@ -2,6 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Play, ExternalLink, ChevronRight, Share2, Disc, Users, Mail, Phone } from 'lucide-react';
 import gifBg from './images/gif.gif';
+import EP from './images/EP.jpg';
+import One from './images/one.jpg';
+import Two from './images/two.jpg';
+import Three from './images/three.jpg';
 
 // Import the new product image - replace with your actual image path
 import nowAvailableProduct from './images/now-available-product.jpg'; // Add your image here
